@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useGameSettings } from "../context/GameContext";
 
 const getEmojis = async (count = 10) => {
   const res = await fetch(
@@ -13,7 +14,7 @@ const getEmojis = async (count = 10) => {
   return shuffled.slice(0, count);
 };
 
-const generateCards = async (count = 6) => {
+const generateCards = async (count) => {
   const selected = await getEmojis(count);
   const pairs = [...selected, ...selected];
 
@@ -27,25 +28,15 @@ const generateCards = async (count = 6) => {
     }));
 };
 
-const useGameLogic = (difficulty = "easy") => {
+const useGameLogic = () => {
+  const { settings } = useGameSettings();
   const [cards, setCards] = useState([]);
   const [moves, setMoves] = useState(0);
   const [flippedCards, setFlippedCards] = useState([]);
   const [isGameOver, setIsGameOver] = useState(false);
 
-  const getPairCount = () => {
-    switch (difficulty) {
-      case "medium":
-        return 8;
-      case "hard":
-        return 10;
-      default:
-        return 6;
-    }
-  };
-
   const startGame = async () => {
-    const newCards = await generateCards(getPairCount());
+    const newCards = await generateCards(settings.pairs);
     setCards(newCards);
     setMoves(0);
     setFlippedCards([]);
@@ -63,8 +54,9 @@ const useGameLogic = (difficulty = "easy") => {
     if (flippedCards.length === 0) {
       setFlippedCards([id]);
     } else if (flippedCards.length === 1) {
-      const firstId = flippedCards[0];
+      const [firstId] = flippedCards;
       const secondId = id;
+
       setFlippedCards([firstId, secondId]);
       setMoves((prev) => prev + 1);
 
@@ -90,7 +82,7 @@ const useGameLogic = (difficulty = "easy") => {
             )
           );
           setFlippedCards([]);
-        }, 250);
+        }, settings.speed);
       }
     }
   };
@@ -103,7 +95,7 @@ const useGameLogic = (difficulty = "easy") => {
 
   useEffect(() => {
     startGame();
-  }, []);
+  }, [settings]);
 
   return {
     cards,

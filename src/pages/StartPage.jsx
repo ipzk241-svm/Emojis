@@ -6,13 +6,12 @@ import useGameLogic from "../hooks/UseGameLogic";
 
 const StartPage = () => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  const [startGame] = useGameLogic();
+  const {startGame} = useGameLogic();
 
   const handleStartGame = () => {
     // move to GamePage
     startGame();
   };
-aa
   return (
     <div className="start-page">
       <button className="button" onClick={handleStartGame}>
@@ -26,7 +25,7 @@ aa
       <ModalWindow
         isOpen={isSettingsOpen}
         onClose={() => setIsSettingsOpen(false)}
-        Content={<Settings />}
+        Content={<Settings onClose={() => setIsSettingsOpen(false)} />}
       />
     </div>
   );
