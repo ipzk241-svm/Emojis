@@ -1,13 +1,12 @@
 import React from "react";
 import "../../styles/App.css";
 
-const EmojiCard = ({ emoji, isFlipped, onClick }) => {
+const EmojiCard = ({ emoji, onClick }) => {
   return (
-    <div
-      className={`game-card ${isFlipped ? "flipped" : ""}`}
-      onClick={onClick}
-    >
-      {isFlipped ? emoji : "?"}
+    <div>
+      <div className="game-card" onClick={onClick}>
+        {emoji.symbol}
+      </div>
     </div>
   );
 };

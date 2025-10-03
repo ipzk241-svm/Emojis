@@ -1,11 +1,9 @@
 import React from "react";
 
-const GameStats = ({ moves, time, matchedPairs }) => {
+const GameStats = () => {
   return (
     <div className="game-stats">
-      <p>
-        Ходи: {moves} | Знайдено пар: {matchedPairs} | Час: {time}
-      </p>
+      <p>Ходи: 0 | Час: 00:00</p>
     </div>
   );
 };

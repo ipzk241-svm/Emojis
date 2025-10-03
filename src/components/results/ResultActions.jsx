@@ -12,7 +12,7 @@ const ResultActions = ({ onRestart, onBackToStart }) => {
         style={{ marginLeft: "10px" }}
         onClick={onBackToStart}
       >
-        Головне меню
+        На старт
       </button>
     </div>
   );
