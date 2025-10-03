@@ -71,6 +71,16 @@
   transform: scale(1.1);
   box-shadow: 0 0 15px #9f5cff;
 }
+.flipped {
+  background-color: #6d28d9;
+  cursor: default;
+  box-shadow: 0 0 15px #5b21b6;
+}
+.flipped:hover {
+  transform: none;
+  box-shadow: 0 0 15px #5b21b6;
+  cursor: default;
+}
 
 .game-stats {
   font-size: 16px;

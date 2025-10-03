@@ -2,27 +2,15 @@ import React from "react";
 import "../../styles/App.css";
 import EmojiCard from "./EmojiCard";
 
-const emojis = [
-  { id: 1, symbol: "😀" },
-  { id: 2, symbol: "😎" },
-  { id: 3, symbol: "🥳" },
-  { id: 4, symbol: "👾" },
-  { id: 5, symbol: "🚀" },
-  { id: 6, symbol: "🌟" },
-  { id: 7, symbol: "🪐" },
-  { id: 8, symbol: "👽" },
-];
-
-const GameBoard = ({ boardSize, onCardClick }) => {
-  const cards = [...emojis, ...emojis];
-
+const GameBoard = ({ cards, onCardClick }) => {
   return (
     <div className="game-board">
-      {cards.map((emoji, index) => (
+      {cards.map((card, index) => (
         <EmojiCard
-          key={emoji.id + Math.random()}
-          emoji={emoji}
-          onClick={() => onCardClick(index)}
+          key={card.id}
+          emoji={card.emoji}
+          isFlipped={card.isFlipped}
+          onClick={() => onCardClick(card.id)}
         />
       ))}
     </div>
