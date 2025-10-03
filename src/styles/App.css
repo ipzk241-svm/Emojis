@@ -45,11 +45,10 @@
 .game-board {
   margin: 20px auto;
   padding: 20px;
-  background-color: #2a0040; /* Темно-фіолетовий фон сітки */
+  background-color: #2a0040;
   border-radius: 12px;
   min-height: 200px;
   display: grid;
-  grid-template-columns: repeat(4, 60px); /* 4 колонки для початку */
   grid-gap: 15px;
   justify-content: center;
 }
@@ -57,7 +56,7 @@
 .game-card {
   width: 60px;
   height: 60px;
-  background-color: #3d0066; /* темно-фіолетова картка */
+  background-color: #3d0066;
   border-radius: 8px;
   display: flex;
   justify-content: center;
@@ -70,6 +69,16 @@
 .game-card:hover {
   transform: scale(1.1);
   box-shadow: 0 0 15px #9f5cff;
+}
+.flipped {
+  background-color: #6d28d9;
+  cursor: default;
+  box-shadow: 0 0 15px #5b21b6;
+}
+.flipped:hover {
+  transform: none;
+  box-shadow: 0 0 15px #5b21b6;
+  cursor: default;
 }
 
 .game-stats {
@@ -111,7 +120,7 @@
 }
 
 .card {
-  background-color: #3d0066; /* темно-фіолетова картка */
+  background-color: #3d0066;
   border-radius: 8px;
   display: flex;
   justify-content: center;

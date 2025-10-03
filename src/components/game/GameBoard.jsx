@@ -1,28 +1,26 @@
 import React from "react";
 import "../../styles/App.css";
 import EmojiCard from "./EmojiCard";
+import { useGameSettings } from "../../context/GameContext";
 
-const emojis = [
-  { id: 1, symbol: "😀" },
-  { id: 2, symbol: "😎" },
-  { id: 3, symbol: "🥳" },
-  { id: 4, symbol: "👾" },
-  { id: 5, symbol: "🚀" },
-  { id: 6, symbol: "🌟" },
-  { id: 7, symbol: "🪐" },
-  { id: 8, symbol: "👽" },
-];
-
-const GameBoard = ({ boardSize, onCardClick }) => {
-  const cards = [...emojis, ...emojis];
+const GameBoard = ({ cards, onCardClick }) => {
+  const { settings } = useGameSettings();
 
   return (
-    <div className="game-board">
-      {cards.map((emoji, index) => (
+    <div
+      className="game-board"
+      style={{
+        gridTemplateColumns: `repeat(${Math.round(settings.pairs / 2)+1}, ${
+          settings.cardSize
+        }px)`,
+      }}
+    >
+      {cards.map((card) => (
         <EmojiCard
-          key={emoji.id + Math.random()}
-          emoji={emoji}
-          onClick={() => onCardClick(index)}
+          key={card.id}
+          emoji={card.emoji}
+          isFlipped={card.isFlipped}
+          onClick={() => onCardClick(card.id)}
         />
       ))}
     </div>

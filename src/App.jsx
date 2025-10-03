@@ -4,12 +4,16 @@ import StartPage from "./pages/StartPage";
 import GamePage from "./pages/GamePage";
 import ResultSummary from "./components/results/ResultSummary";
 import ResultsPage from "./pages/ResultsPage";
+import { GameProvider } from "./context/GameContext";
 
 function App() {
   return (
-    <PageWrapper>
-      <GamePage />
-    </PageWrapper>
+    <GameProvider>
+      <PageWrapper>
+        <GamePage />
+        {/* <StartPage /> */}
+      </PageWrapper>
+    </GameProvider>
   );
 }
 

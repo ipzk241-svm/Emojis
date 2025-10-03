@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
+import { createPortal } from "react-dom";
 import "../../styles/settings.css";
 
 const ModalWindow = ({ isOpen, onClose, Content }) => {
   if (!isOpen) return null;
 
-  return (
+  return createPortal(
     <div className="modal-overlay">
       <div className="modal-content">
         <button className="modal-close-btn" onClick={onClose}>
@@ -12,7 +13,8 @@ const ModalWindow = ({ isOpen, onClose, Content }) => {
         </button>
         {Content}
       </div>
-    </div>
+    </div>,
+    document.getElementById("modal-root")
   );
 };
 
