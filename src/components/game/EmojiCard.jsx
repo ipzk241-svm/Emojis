@@ -7,15 +7,18 @@ const EmojiCard = ({ emoji, isFlipped, onClick }) => {
 
   return (
     <div
+      className={`card-container ${isFlipped ? "flipped" : ""}`}
+      onClick={!isFlipped ? onClick : undefined}
       style={{
         width: settings.cardSize,
         height: settings.cardSize,
-        fontSize: settings.cardSize * 0.6,
       }}
-      className={`game-card ${isFlipped ? "flipped" : ""}`}
-      onClick={onClick}
     >
-      {isFlipped ? emoji : "?"}
+      <div className="card-face card-front">?</div>
+
+      <div className="card-face card-back">
+        <span>{emoji}</span>
+      </div>
     </div>
   );
 };
