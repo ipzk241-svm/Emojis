@@ -1,17 +1,17 @@
 import React from "react";
 import "../../styles/App.css";
 import EmojiCard from "./EmojiCard";
-import { useGameSettings } from "../../context/GameContext";
 import { useWindowSize } from "../../hooks/useWindowSize";
+import useGameLogic from "../../hooks/UseGameLogic";
 
 const GameBoard = ({ cards, onCardClick }) => {
-  const { settings } = useGameSettings();
+  const { cardSize } = useGameLogic();
   const { width } = useWindowSize();
 
   const numCards = cards.length;
   let optimalColumns = Math.min(
     Math.ceil(Math.sqrt(numCards)),
-    Math.floor(width / (settings.cardSize + 20))
+    Math.floor(width / (cardSize + 20))
   );
   optimalColumns = Math.max(2, optimalColumns);
 

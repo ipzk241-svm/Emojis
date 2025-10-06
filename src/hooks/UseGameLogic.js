@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useGameSettings } from "../context/GameContext";
+import { useSelector } from "react-redux";
 
 const getEmojis = async (count = 10) => {
   const res = await fetch(
@@ -8,7 +8,6 @@ const getEmojis = async (count = 10) => {
   const all = await res.json();
 
   const emojis = all.map((e) => e.emoji).filter(Boolean);
-
   const shuffled = emojis.sort(() => Math.random() - 0.5);
 
   return shuffled.slice(0, count);
@@ -29,12 +28,13 @@ const generateCards = async (count) => {
 };
 
 const useGameLogic = () => {
-  const { settings } = useGameSettings();
+  const settings = useSelector((state) => state.settings);
+
   const [cards, setCards] = useState([]);
   const [moves, setMoves] = useState(0);
   const [flippedCards, setFlippedCards] = useState([]);
   const [isGameOver, setIsGameOver] = useState(false);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
 
   const startGame = async () => {
     setLoading(true);
@@ -43,7 +43,7 @@ const useGameLogic = () => {
     setMoves(0);
     setFlippedCards([]);
     setIsGameOver(false);
-    setLoading(false); 
+    setLoading(false);
   };
 
   const flipCard = (id) => {
@@ -107,7 +107,8 @@ const useGameLogic = () => {
     flipCard,
     startGame,
     isGameOver,
-    loading, 
+    loading,
+    cardSize: settings.cardSize,
   };
 };
 

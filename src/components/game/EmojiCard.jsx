@@ -1,17 +1,17 @@
 import React from "react";
 import "../../styles/App.css";
-import { useGameSettings } from "../../context/GameContext";
+import useGameLogic from "../../hooks/UseGameLogic";
 
 const EmojiCard = ({ emoji, isFlipped, onClick }) => {
-  const { settings } = useGameSettings();
+  const { cardSize } = useGameLogic();
 
   return (
     <div
       className={`card-container ${isFlipped ? "flipped" : ""}`}
       onClick={!isFlipped ? onClick : undefined}
       style={{
-        width: settings.cardSize,
-        height: settings.cardSize,
+        width: cardSize,
+        height: cardSize,
       }}
     >
       <div className="card-face card-front">?</div>
