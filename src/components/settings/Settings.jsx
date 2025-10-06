@@ -1,8 +1,9 @@
 import React from "react";
-import { useGameSettings } from "../../context/GameContext";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import "../../styles/settings.css"; // підключаємо стилі
+import "../../styles/settings.css";
+import { useDispatch, useSelector } from "react-redux";
+import { updateSettings } from "../../slices/settingsSlice";
 
 const SettingsSchema = Yup.object().shape({
   pairs: Yup.number().min(2).max(40).required("Вкажи кількість пар"),
@@ -11,14 +12,16 @@ const SettingsSchema = Yup.object().shape({
 });
 
 const Settings = ({ onClose }) => {
-  const { settings, updateSettings } = useGameSettings();
+  const settings = useSelector((state) => state.settings);
+  const dispatch = useDispatch();
 
   return (
     <Formik
+      enableReinitialize
       initialValues={settings}
       validationSchema={SettingsSchema}
       onSubmit={(values) => {
-        updateSettings(values);
+        dispatch(updateSettings(values));
         onClose();
       }}
     >
