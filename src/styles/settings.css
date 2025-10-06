@@ -4,7 +4,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6); /* Темніше для атмосфери */
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,12 +13,11 @@
 
 .modal-content {
   position: relative;
-  background: #1d012e; /* Темно-фіолетовий фон */
-  padding: 20px;
+  background: #1d012e;
+  padding: 30px;
   border-radius: 10px;
-  width: 320px;
   text-align: center;
-  color: #e5d7ff; /* Світлий текст */
+  color: #e5d7ff;
   box-shadow: 0 0 20px rgba(150, 50, 250, 0.3);
   border: 1px solid rgba(165, 80, 255, 0.2);
 }
@@ -44,7 +43,7 @@
 
 .button {
   padding: 10px 20px;
-  background-color: #6d28d9; /* Ніжно-фіолетова кнопка */
+  background-color: #6d28d9;
   color: white;
   border: none;
   border-radius: 6px;
@@ -58,8 +57,8 @@
 
 .modal-close-btn {
   position: absolute;
-  top: 8px;
-  right: 10px;
+  top: 0px;
+  right: 0px;
   padding: 5px;
   color: #ff5c5c;
   background: none;
@@ -71,4 +70,81 @@
 
 .modal-close-btn:hover {
   color: #ff7878;
+}
+.settings-form {
+  background: #3a1457;
+  padding: 20px;
+  border-radius: 12px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  min-width: 300px;
+}
+
+.settings-form h2 {
+  margin-bottom: 10px;
+  font-size: 20px;
+  text-align: center;
+  color: #c5baff;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-input {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background: #2b2b3d;
+  color: #fff;
+  font-size: 14px;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #7b6eff;
+  box-shadow: 0 0 5px #7b6eff;
+}
+
+.error {
+  color: #ff6b6b;
+  font-size: 12px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  gap: 10px;
+}
+
+.btn {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.btn-primary {
+  background: #7b6eff;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #6758d8;
+}
+
+.btn-secondary {
+  background: #444;
+  color: #ddd;
+}
+
+.btn-secondary:hover {
+  background: #555;
 }

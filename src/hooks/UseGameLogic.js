@@ -34,13 +34,16 @@ const useGameLogic = () => {
   const [moves, setMoves] = useState(0);
   const [flippedCards, setFlippedCards] = useState([]);
   const [isGameOver, setIsGameOver] = useState(false);
+  const [loading, setLoading] = useState(true); 
 
   const startGame = async () => {
+    setLoading(true);
     const newCards = await generateCards(settings.pairs);
     setCards(newCards);
     setMoves(0);
     setFlippedCards([]);
     setIsGameOver(false);
+    setLoading(false); 
   };
 
   const flipCard = (id) => {
@@ -104,6 +107,7 @@ const useGameLogic = () => {
     flipCard,
     startGame,
     isGameOver,
+    loading, 
   };
 };
 
