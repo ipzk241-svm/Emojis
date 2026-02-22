@@ -3,6 +3,7 @@ import * as Yup from "yup";
 import styles from "./Settings.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { updateSettings } from "../../slices/settingsSlice";
+import Button from "../ui/Button";
 
 const SettingsSchema = Yup.object().shape({
   pairs: Yup.number().min(2).max(40).required("Вкажи кількість пар"),
@@ -10,7 +11,17 @@ const SettingsSchema = Yup.object().shape({
   cardSize: Yup.number().min(40).max(120).required("Вкажи розмір карток"),
 });
 
-const Settings = ({ onClose }) => {
+/**
+ * Displays the configuration form for the memory game.
+ * Uses Formik and Yup for state management and validation.
+ * Updates the global Redux store upon submission.
+ *
+ * @function Settings
+ * @param {Object} props - Component properties.
+ * @param {Function} props.onClose - Callback executed to close the settings modal.
+ * @returns {JSX.Element} The settings form interface.
+ */
+const Settings = ({ onClose, backgroundColor, textColor }) => {
   const settings = useSelector((state) => state.settings);
   const dispatch = useDispatch();
 
@@ -25,7 +36,13 @@ const Settings = ({ onClose }) => {
       }}
     >
       {() => (
-        <Form className={styles.settingsForm}>
+        <Form
+          className={styles.settingsForm}
+          style={{
+            "--settings-bg-color": backgroundColor,
+            "--settings-text-color": textColor,
+          }}
+        >
           <h2>⚙️ Налаштування гри</h2>
 
           <div className={styles.formGroup}>
@@ -59,12 +76,11 @@ const Settings = ({ onClose }) => {
           </div>
 
           <div className={styles.formActions}>
-            <button type="submit" className="button">
-              Зберегти
-            </button>
-            <button type="button" className="button" onClick={onClose}>
+            <Button type="submit">Зберегти</Button>
+
+            <Button type="button" onClick={onClose}>
               Відміна
-            </button>
+            </Button>
           </div>
         </Form>
       )}

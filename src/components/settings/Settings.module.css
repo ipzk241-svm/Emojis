@@ -1,11 +1,11 @@
 .settingsForm {
+  background-color: var(--settings-bg-color, #2c3e50);
+  color: var(--settings-text-color, #ffffff);
+  padding: 20px;
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
   gap: 15px;
-  padding: 20px;
-  background: rgb(81, 9, 114);
-  border-radius: 8px;
-  min-width: 300px;
 }
 
 .formGroup {

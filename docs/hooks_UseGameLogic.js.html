@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: hooks/UseGameLogic.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: hooks/UseGameLogic.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { useDispatch, useSelector } from "react-redux";
+import {
+  startGame,
+  flipCard,
+  matchCards,
+  unflipCards,
+  incrementMoves,
+  setGameOver,
+} from "../slices/gameSlice";
+import { useEffect, useState } from "react";
+
+/**
+ * Custom hook to manage the memory game logic and state.
+ * Interacts with the Redux store to handle game settings, moves, and card flipping.
+ *
+ * @module useGameLogic
+ * @returns {Object} Game state and control functions.
+ * @property {Array} cards - The current array of card objects.
+ * @property {number} moves - The total number of moves made by the user.
+ * @property {Array} flippedCards - The IDs of currently flipped cards.
+ * @property {boolean} isGameOver - Status indicating if all pairs are matched.
+ * @property {boolean} loading - Loading state during game initialization.
+ * @property {number} cardSize - The visual size of the cards from settings.
+ * @property {Function} startGame - Function to reset and start a new game.
+ * @property {Function} flipCard - Function to handle the flipping of a specific card.
+ */
+const useGameLogic = () => {
+  const dispatch = useDispatch();
+  const settings = useSelector((state) => state.settings);
+  const { cards, moves, isGameOver } = useSelector((state) => state.game);
+
+  const [flippedCards, setFlippedCards] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  /**
+   * Initializes a new game by resetting states and generating new cards.
+   * Dispatches the startGame thunk and resets the game over status.
+   *
+   * @async
+   * @function newGame
+   * @returns {Promise&lt;void>}
+   */
+  const newGame = async () => {
+    setLoading(true);
+    await dispatch(startGame(settings.pairs));
+    dispatch(setGameOver(false)); // Зняв await, бо екшен синхронний
+    setFlippedCards([]);
+    setLoading(false);
+  };
+
+  /**
+   * Handles the logic when a user clicks on a card.
+   * Prevents flipping more than two cards at once or flipping already matched cards.
+   * Validates pairs and dispatches match or unflip actions accordingly.
+   *
+   * @function handleFlip
+   * @param {number} id - The unique identifier of the clicked card.
+   */
+  const handleFlip = (id) => {
+    if (flippedCards.length === 2) return;
+    const card = cards.find((c) => c.id === id);
+    if (!card || card.isMatched) return;
+
+    dispatch(flipCard(id));
+
+    if (flippedCards.length === 0) {
+      setFlippedCards([id]);
+    } else if (flippedCards.length === 1) {
+      const [firstId] = flippedCards;
+      const secondId = id;
+      setFlippedCards([firstId, secondId]);
+      dispatch(incrementMoves());
+
+      const firstCard = cards.find((c) => c.id === firstId);
+      const secondCard = cards.find((c) => c.id === secondId);
+
+      if (firstCard.emoji === secondCard.emoji) {
+        dispatch(matchCards({ firstId, secondId }));
+        setFlippedCards([]);
+      } else {
+        setTimeout(() => {
+          dispatch(unflipCards({ firstId, secondId }));
+          setFlippedCards([]);
+        }, settings.speed);
+      }
+    }
+  };
+
+  useEffect(() => {
+    newGame();
+  }, [settings]);
+
+  useEffect(() => {
+    if (!loading &amp;&amp; cards.length > 0 &amp;&amp; cards.every((c) => c.isMatched)) {
+      dispatch(setGameOver(true));
+    }
+  }, [cards, dispatch, loading]);
+
+  return {
+    cards,
+    moves,
+    flippedCards,
+    isGameOver,
+    loading,
+    cardSize: settings.cardSize,
+    startGame: newGame,
+    flipCard: handleFlip,
+  };
+};
+
+export default useGameLogic;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-useGameLogic.html">useGameLogic</a></li><li><a href="module-useTimer.html">useTimer</a></li><li><a href="module-useWindowSize.html">useWindowSize</a></li></ul><h3>Global</h3><ul><li><a href="global.html#EmojiCard">EmojiCard</a></li><li><a href="global.html#GameBoard">GameBoard</a></li><li><a href="global.html#GameStats">GameStats</a></li><li><a href="global.html#ModalWindow">ModalWindow</a></li><li><a href="global.html#ResultActions">ResultActions</a></li><li><a href="global.html#ResultSummary">ResultSummary</a></li><li><a href="global.html#Settings">Settings</a></li><li><a href="global.html#generateCards">generateCards</a></li><li><a href="global.html#getEmojis">getEmojis</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Sun Feb 22 2026 18:57:34 GMT+0200 (за східноєвропейським стандартним часом)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

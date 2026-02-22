@@ -10,6 +10,7 @@ import ModalWindow from "../components/ui/ModalWindow";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { resetGameState } from "../slices/gameSlice";
+import Button from "../components/ui/Button";
 
 const GamePage = () => {
   const { cards, flipCard, moves, isGameOver, startGame, loading } =
@@ -64,12 +65,14 @@ const GamePage = () => {
         <>
           <div className={styles.gameControls}>
             {isGameOver && (
-              <button className="button" onClick={handleRestart}>
-                Нова гра
-              </button>
+              <Button onClick={handleRestart} className={styles.restartButton}>
+                Почати заново
+              </Button>
             )}
             <Link to="/">
-              <button className="button">Повернутися на головну</button>
+              <Button className={styles.backToStartButton}>
+                Повернутися на головну
+              </Button>
             </Link>
           </div>
           <GameStats

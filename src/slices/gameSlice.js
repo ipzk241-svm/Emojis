@@ -1,5 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+/**
+ * Fetches random emojis from a public repository.
+ * * @async
+ * @function getEmojis
+ * @param {number} [count=10] - The number of unique emojis to fetch.
+ * @returns {Promise<Array<string>>} An array of shuffled emoji strings.
+ */
 const getEmojis = async (count = 10) => {
   const res = await fetch(
     "https://raw.githubusercontent.com/github/gemoji/master/db/emoji.json",
@@ -10,6 +17,13 @@ const getEmojis = async (count = 10) => {
   return shuffled.slice(0, count);
 };
 
+/**
+ * Generates a shuffled array of card objects with paired emojis.
+ * * @async
+ * @function generateCards
+ * @param {number} count - The number of pairs to generate.
+ * @returns {Promise<Array<Object>>} An array of card objects ready for the game board.
+ */
 const generateCards = async (count) => {
   const selected = await getEmojis(count);
   const pairs = [...selected, ...selected];

@@ -3,6 +3,7 @@ import ModalWindow from "../components/ui/ModalWindow";
 import { Link } from "react-router-dom";
 import styles from "./StartPage.module.css";
 import { useState } from "react";
+import Button from "../components/ui/Button";
 
 const StartPage = () => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
@@ -11,12 +12,15 @@ const StartPage = () => {
     <div className={styles.startPage}>
       <h1 className={styles.title}>Memory Game</h1>
       <Link to="/game">
-        <button className="button">Почати гру</button>
+        <Button className={styles.startGameButton}>Почати гру</Button>
       </Link>
 
-      <button className="button" onClick={() => setIsSettingsOpen(true)}>
+      <Button
+        onClick={() => setIsSettingsOpen(true)}
+        className={styles.settingsButton}
+      >
         Налаштування
-      </button>
+      </Button>
 
       <ModalWindow
         isOpen={isSettingsOpen}

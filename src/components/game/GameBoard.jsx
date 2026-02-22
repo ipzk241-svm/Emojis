@@ -3,6 +3,15 @@ import EmojiCard from "./EmojiCard";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import useGameLogic from "../../hooks/UseGameLogic";
 
+/**
+ * Renders the grid of memory cards based on the current game state.
+ * Calculates optimal columns based on the window size and number of cards.
+ *
+ * @function GameBoard
+ * @param {Array<Object>} props.cards - Array of card objects to be displayed.
+ * @param {Function} props.onCardClick - Callback passed down to handle card flips.
+ * @returns {JSX.Element} The game board container with rendered cards.
+ */
 const GameBoard = ({ cards, onCardClick }) => {
   const { cardSize } = useGameLogic();
   const { width } = useWindowSize();

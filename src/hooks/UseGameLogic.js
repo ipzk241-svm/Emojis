@@ -9,6 +9,21 @@ import {
 } from "../slices/gameSlice";
 import { useEffect, useState } from "react";
 
+/**
+ * Custom hook to manage the memory game logic and state.
+ * Interacts with the Redux store to handle game settings, moves, and card flipping.
+ *
+ * @module useGameLogic
+ * @returns {Object} Game state and control functions.
+ * @property {Array} cards - The current array of card objects.
+ * @property {number} moves - The total number of moves made by the user.
+ * @property {Array} flippedCards - The IDs of currently flipped cards.
+ * @property {boolean} isGameOver - Status indicating if all pairs are matched.
+ * @property {boolean} loading - Loading state during game initialization.
+ * @property {number} cardSize - The visual size of the cards from settings.
+ * @property {Function} startGame - Function to reset and start a new game.
+ * @property {Function} flipCard - Function to handle the flipping of a specific card.
+ */
 const useGameLogic = () => {
   const dispatch = useDispatch();
   const settings = useSelector((state) => state.settings);
@@ -17,14 +32,30 @@ const useGameLogic = () => {
   const [flippedCards, setFlippedCards] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  /**
+   * Initializes a new game by resetting states and generating new cards.
+   * Dispatches the startGame thunk and resets the game over status.
+   *
+   * @async
+   * @function newGame
+   * @returns {Promise<void>}
+   */
   const newGame = async () => {
     setLoading(true);
     await dispatch(startGame(settings.pairs));
-    await setGameOver(false);
+    dispatch(setGameOver(false)); // Зняв await, бо екшен синхронний
     setFlippedCards([]);
     setLoading(false);
   };
 
+  /**
+   * Handles the logic when a user clicks on a card.
+   * Prevents flipping more than two cards at once or flipping already matched cards.
+   * Validates pairs and dispatches match or unflip actions accordingly.
+   *
+   * @function handleFlip
+   * @param {number} id - The unique identifier of the clicked card.
+   */
   const handleFlip = (id) => {
     if (flippedCards.length === 2) return;
     const card = cards.find((c) => c.id === id);
