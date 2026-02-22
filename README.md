@@ -16,4 +16,4 @@ A memory training game where you need to find matching emoji pairs. Created as p
 ## 📜 License
 
 The project is distributed under the [MIT](./LICENSE) license.
-Additional [dependency](./license-report.md) report is also available.
+Additional [dependency](./license-report.txt) report is also available.
