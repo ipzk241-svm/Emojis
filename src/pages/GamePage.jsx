@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import styles from "./GamePage.module.css";
 import GameBoard from "../components/game/GameBoard";
 import GameStats from "../components/game/GameStats";
 import useGameLogic from "../hooks/UseGameLogic";
@@ -6,13 +7,18 @@ import useTimer from "../hooks/useTimer";
 import ResultSummary from "../components/results/ResultSummary";
 import ResultActions from "../components/results/ResultActions";
 import ModalWindow from "../components/ui/ModalWindow";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { resetGameState } from "../slices/gameSlice";
 
 const GamePage = () => {
   const { cards, flipCard, moves, isGameOver, startGame, loading } =
     useGameLogic("easy");
   const [matchedPairs, setMatchedPairs] = useState(0);
   const { formatTime, start, stop, reset } = useTimer();
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const [showResultModal, setShowResultModal] = useState(false);
 
@@ -21,15 +27,15 @@ const GamePage = () => {
   }, [cards]);
 
   useEffect(() => {
-    start();
-  }, []);
-
-  useEffect(() => {
     if (isGameOver) {
       stop();
       setShowResultModal(true);
     }
   }, [isGameOver]);
+
+  useEffect(() => {
+    start();
+  }, []);
 
   const handleRestart = () => {
     startGame();
@@ -42,13 +48,21 @@ const GamePage = () => {
     setShowResultModal(false);
   };
 
+  const handleBackToStart = () => {
+    setShowResultModal(false);
+    dispatch(resetGameState());
+    reset();
+    stop();
+    navigate("/");
+  };
+
   return (
-    <div className="game-page">
+    <div className={styles.gamePage}>
       {loading ? (
-        <div className="loader"></div>
+        <div className={styles.loader}></div>
       ) : (
         <>
-          <div className="game-controls">
+          <div className={styles.gameControls}>
             {isGameOver && (
               <button className="button" onClick={handleRestart}>
                 Нова гра
@@ -70,7 +84,10 @@ const GamePage = () => {
             Content={
               <>
                 <ResultSummary moves={moves} time={formatTime()} />
-                <ResultActions onRestart={handleRestart} />
+                <ResultActions
+                  onRestart={handleRestart}
+                  onBackToStart={handleBackToStart}
+                />
               </>
             }
           />

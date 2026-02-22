@@ -1,14 +1,11 @@
-import React from "react";
-import "../../styles/App.css";
+import styles from "./ResultSummary.module.css";
 
-const ResultSummary = ({ moves, time }) => {
-  return (
-    <div className="result-summary">
-      <h2>!Ви завершили гру!</h2>
-      <p>Ходи: {moves}</p>
-      <p>Час: {time}</p>
-    </div>
-  );
-};
+const ResultSummary = ({ moves, time }) => (
+  <div className={styles.resultSummary}>
+    <h2 className={styles.title}>🎉 Ви завершили гру!</h2>
+    <p className={styles.info}>Ходи: {moves}</p>
+    <p className={styles.info}>Час: {time}</p>
+  </div>
+);
 
 export default ResultSummary;

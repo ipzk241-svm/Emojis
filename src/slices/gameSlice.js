@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const getEmojis = async (count = 10) => {
   const res = await fetch(
-    "https://raw.githubusercontent.com/github/gemoji/master/db/emoji.json"
+    "https://raw.githubusercontent.com/github/gemoji/master/db/emoji.json",
   );
   const all = await res.json();
   const emojis = all.map((e) => e.emoji).filter(Boolean);
@@ -46,13 +46,13 @@ const gameSlice = createSlice({
     matchCards: (state, action) => {
       const { firstId, secondId } = action.payload;
       state.cards = state.cards.map((c) =>
-        c.id === firstId || c.id === secondId ? { ...c, isMatched: true } : c
+        c.id === firstId || c.id === secondId ? { ...c, isMatched: true } : c,
       );
     },
     unflipCards: (state, action) => {
       const { firstId, secondId } = action.payload;
       state.cards = state.cards.map((c) =>
-        c.id === firstId || c.id === secondId ? { ...c, isFlipped: false } : c
+        c.id === firstId || c.id === secondId ? { ...c, isFlipped: false } : c,
       );
     },
     incrementMoves: (state) => {
@@ -60,6 +60,11 @@ const gameSlice = createSlice({
     },
     setGameOver: (state, action) => {
       state.isGameOver = action.payload;
+    },
+    resetGameState: (state) => {
+      state.cards = [];
+      state.moves = 0;
+      state.isGameOver = false;
     },
   },
   extraReducers: (builder) => {
@@ -77,6 +82,7 @@ export const {
   unflipCards,
   incrementMoves,
   setGameOver,
+  resetGameState
 } = gameSlice.actions;
 
 export default gameSlice.reducer;

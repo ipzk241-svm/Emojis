@@ -1,0 +1,9 @@
+.gameBoard {
+  display: grid;
+  gap: 15px;
+  justify-content: center;
+  margin: 20px auto;
+  padding: 10px;
+  max-width: 100%;
+}
+

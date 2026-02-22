@@ -1,4 +1,3 @@
-import React from "react";
 import PageWrapper from "./components/layout/PageWrapper";
 import StartPage from "./pages/StartPage";
 import GamePage from "./pages/GamePage";

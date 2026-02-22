@@ -1,0 +1,14 @@
+.resultSummary {
+  text-align: center;
+  padding: 10px;
+}
+
+.title {
+  color: #27ae60;
+  margin-bottom: 15px;
+}
+
+.info {
+  font-size: 1.2rem;
+  margin: 5px 0;
+}

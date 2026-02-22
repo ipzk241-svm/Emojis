@@ -20,6 +20,7 @@ const useGameLogic = () => {
   const newGame = async () => {
     setLoading(true);
     await dispatch(startGame(settings.pairs));
+    await setGameOver(false);
     setFlippedCards([]);
     setLoading(false);
   };
@@ -55,14 +56,14 @@ const useGameLogic = () => {
   };
 
   useEffect(() => {
-    if (cards.length > 0 && cards.every((c) => c.isMatched)) {
-      dispatch(setGameOver(true));
-    }
-  }, [cards, dispatch]);
-
-  useEffect(() => {
     newGame();
   }, [settings]);
+
+  useEffect(() => {
+    if (!loading && cards.length > 0 && cards.every((c) => c.isMatched)) {
+      dispatch(setGameOver(true));
+    }
+  }, [cards, dispatch, loading]);
 
   return {
     cards,

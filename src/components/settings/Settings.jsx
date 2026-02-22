@@ -1,7 +1,6 @@
-import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import "../../styles/settings.css";
+import styles from "./Settings.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { updateSettings } from "../../slices/settingsSlice";
 
@@ -26,36 +25,44 @@ const Settings = ({ onClose }) => {
       }}
     >
       {() => (
-        <Form className="settings-form">
+        <Form className={styles.settingsForm}>
           <h2>⚙️ Налаштування гри</h2>
 
-          <div className="form-group">
+          <div className={styles.formGroup}>
             <label>Кількість пар</label>
-            <Field type="number" name="pairs" className="form-input" />
-            <ErrorMessage name="pairs" component="div" className="error" />
+            <Field type="number" name="pairs" className={styles.formInput} />
+            <ErrorMessage
+              name="pairs"
+              component="div"
+              className={styles.error}
+            />
           </div>
 
-          <div className="form-group">
+          <div className={styles.formGroup}>
             <label>Швидкість (мс)</label>
-            <Field type="number" name="speed" className="form-input" />
-            <ErrorMessage name="speed" component="div" className="error" />
+            <Field type="number" name="speed" className={styles.formInput} />
+            <ErrorMessage
+              name="speed"
+              component="div"
+              className={styles.error}
+            />
           </div>
 
-          <div className="form-group">
+          <div className={styles.formGroup}>
             <label>Розмір карток (px)</label>
-            <Field type="number" name="cardSize" className="form-input" />
-            <ErrorMessage name="cardSize" component="div" className="error" />
+            <Field type="number" name="cardSize" className={styles.formInput} />
+            <ErrorMessage
+              name="cardSize"
+              component="div"
+              className={styles.error}
+            />
           </div>
 
-          <div className="form-actions">
-            <button type="submit" className="btn btn-primary">
+          <div className={styles.formActions}>
+            <button type="submit" className="button">
               Зберегти
             </button>
-            <button
-              type="button"
-              className="btn btn-secondary"
-              onClick={onClose}
-            >
+            <button type="button" className="button" onClick={onClose}>
               Відміна
             </button>
           </div>

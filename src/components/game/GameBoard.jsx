@@ -1,5 +1,4 @@
-import React from "react";
-import "../../styles/App.css";
+import styles from "./GameBoard.module.css";
 import EmojiCard from "./EmojiCard";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import useGameLogic from "../../hooks/UseGameLogic";
@@ -11,13 +10,13 @@ const GameBoard = ({ cards, onCardClick }) => {
   const numCards = cards.length;
   let optimalColumns = Math.min(
     Math.ceil(Math.sqrt(numCards)),
-    Math.floor(width / (cardSize + 20))
+    Math.floor(width / (cardSize + 20)),
   );
   optimalColumns = Math.max(2, optimalColumns);
 
   return (
     <div
-      className="game-board"
+      className={styles.gameBoard}
       style={{
         gridTemplateColumns: `repeat(${optimalColumns}, minmax(0, 1fr))`,
       }}
