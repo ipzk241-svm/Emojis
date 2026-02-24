@@ -36,6 +36,7 @@ const GameBoard = ({ cards, onCardClick }) => {
           emoji={card.emoji}
           isFlipped={card.isFlipped}
           onClick={() => onCardClick(card.id)}
+          size={cardSize}
         />
       ))}
     </div>

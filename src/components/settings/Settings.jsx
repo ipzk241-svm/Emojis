@@ -6,9 +6,24 @@ import { updateSettings } from "../../slices/settingsSlice";
 import Button from "../ui/Button";
 
 const SettingsSchema = Yup.object().shape({
-  pairs: Yup.number().min(2).max(40).required("Вкажи кількість пар"),
-  speed: Yup.number().min(350).max(2000).required("Вкажи швидкість анімації"),
-  cardSize: Yup.number().min(40).max(120).required("Вкажи розмір карток"),
+  pairs: Yup.number()
+    .typeError("Must be a number")
+    .integer("Must be an integer")
+    .min(2)
+    .max(40)
+    .required("Вкажи кількість пар"),
+  speed: Yup.number()
+    .typeError("Must be a number")
+    .integer("Must be an integer")
+    .min(2)
+    .max(40)
+    .required("Вкажи швидкість анімації"),
+  cardSize: Yup.number()
+    .typeError("Must be a number")
+    .integer("Must be an integer")
+    .min(2)
+    .max(40)
+    .required("Вкажи розмір карток"),
 });
 
 /**

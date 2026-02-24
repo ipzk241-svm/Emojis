@@ -2,9 +2,20 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const saved = localStorage.getItem("gameSettings");
 
-const initialState = saved
-  ? JSON.parse(saved)
-  : { pairs: 6, speed: 500, cardSize: 60 };
+const hasConsent = () => {
+  return document.cookie.includes("memory-game-gdpr=true");
+};
+
+const defaultSettings = { pairs: 6, speed: 500, cardSize: 60 };
+
+const getSavedSettings = () => {
+  if (!hasConsent()) return null;
+
+  const saved = localStorage.getItem("gameSettings");
+  return saved ? JSON.parse(saved) : null;
+};
+
+const initialState = getSavedSettings() || defaultSettings;
 
 const settingsSlice = createSlice({
   name: "settings",
@@ -12,12 +23,17 @@ const settingsSlice = createSlice({
   reducers: {
     updateSettings: (state, action) => {
       const newSettings = { ...state, ...action.payload };
-      localStorage.setItem("gameSettings", JSON.stringify(newSettings));
+
+      if (hasConsent()) {
+        localStorage.setItem("gameSettings", JSON.stringify(newSettings));
+      }
+
       return newSettings;
     },
     resetSettings: () => {
-      const defaultSettings = { pairs: 6, speed: 500, cardSize: 60 };
-      localStorage.setItem("gameSettings", JSON.stringify(defaultSettings));
+      if (hasConsent()) {
+        localStorage.removeItem("gameSettings");
+      }
       return defaultSettings;
     },
   },
