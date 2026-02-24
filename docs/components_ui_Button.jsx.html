@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>components/ui/ModalWindow.jsx - Documentation</title>
+    <title>components/ui/Button.jsx - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -35,7 +35,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">components/ui/ModalWindow.jsx</h1>
+    <h1 class="page-title">components/ui/Button.jsx</h1>
     
 
     
@@ -46,35 +46,31 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from "react";
-import { createPortal } from "react-dom";
-import styles from "./ModalWindow.module.css";
+import styles from "./Button.module.css";
 
 /**
- * A reusable modal component that renders its content into a React portal.
+ * A reusable button component used throughout the application.
  *
- * @function ModalWindow
- * @param {boolean} props.isOpen - Determines whether the modal is visible.
- * @param {Function} props.onClose - Callback executed when the close button is clicked.
- * @param {React.ReactNode} props.Content - The JSX content to render inside the modal.
- * @returns {JSX.Element|null} The modal portal or null if closed.
+ * @function Button
+ * @param {React.ReactNode} props.children - The text or elements displayed inside the button.
+ * @param {string} [props.type="button"] - The HTML button type ("button", "submit", or "reset").
+ * @param {Function} [props.onClick] - Callback function executed on click.
+ * @param {string} [props.className=""] - Additional custom CSS class names.
+ * @returns {JSX.Element} The rendered button component.
  */
-const ModalWindow = ({ isOpen, onClose, Content }) => {
-  if (!isOpen) return null;
-
-  return createPortal(
-    &lt;div className={styles.modalOverlay}>
-      &lt;div className={styles.modalContent}>
-        &lt;button className={styles.modalCloseBtn} onClick={onClose}>
-          &amp;times;
-        &lt;/button>
-        {Content}
-      &lt;/div>
-    &lt;/div>,
-    document.getElementById("modal-root"),
+const Button = ({ children, type = "button", onClick, className = "" }) => {
+  return (
+    &lt;button
+      type={type}
+      onClick={onClick}
+      className={`${styles.button} ${className}`.trim()}
+    >
+      {children}
+    &lt;/button>
   );
 };
 
-export default ModalWindow;
+export default Button;
 </code></pre>
         </article>
     </section>
