@@ -3,7 +3,7 @@
 ## 1. General Provisions
 This document defines the rules for using the "Memory Game" web application and describes the data processing policy.
 
-## 2. Data Collection and Usage (GDPR Compliance)
+## 2. Data Collection and Usage 
 The application runs entirely locally in your browser. 
 - **No Personal Data Collected**: We do not collect personal data (names, emails, geolocation, etc.) and do not send it to external servers.
 - **Local Storage**: We use your browser's local storage (`localStorage`) exclusively to save your game settings (number of card pairs, card size, animation speed) to enhance your gaming experience.
