@@ -7,7 +7,7 @@ import Button from "../components/ui/Button";
 
 const StartPage = () => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-
+  
   return (
     <div className={styles.startPage}>
       <h1 className={styles.title}>Memory Game</h1>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
-import Settings from "./Settings";
+import Settings from "../components/settings/Settings";
 
 const createMockStore = (settingsState) =>
   configureStore({
@@ -45,7 +45,7 @@ export const Default = {
 
 export const EasyLevel = {
   args: {
-    initialSettings: { pairs: 4, speed: 1500, cardSize: 100 },
+    initialSettings: { pairs: 4, speed: 40, cardSize: 100 },
     backgroundColor: "#27ae60",
     textColor: "#ffffff",
   },

@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-const saved = localStorage.getItem("gameSettings");
+import Cookies from "js-cookie";
 
 const hasConsent = () => {
-  return document.cookie.includes("memory-game-gdpr=true");
+  const consent = Cookies.get("memory-game-gdpr");
+  return consent === "accepted";
 };
 
 const defaultSettings = { pairs: 6, speed: 500, cardSize: 60 };

@@ -1,6 +1,6 @@
 import { Provider } from "react-redux";
-import store from "../../store/store";
-import EmojiCard from "./EmojiCard";
+import store from "../store/store";
+import EmojiCard from "../components/game/EmojiCard";
 
 export default {
   title: "Game/EmojiCard",

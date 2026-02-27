@@ -2,7 +2,7 @@ import PageWrapper from "./components/layout/PageWrapper";
 import StartPage from "./pages/StartPage";
 import GamePage from "./pages/GamePage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import PopUp from "./components/ui/PopUp";
+import CookiePopUp from "./components/ui/CookiePopUp";
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
           </Routes>
         </PageWrapper>
       </Router>
-      <PopUp />
+      <CookiePopUp />
     </>
   );
 }

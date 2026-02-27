@@ -15,14 +15,14 @@ const SettingsSchema = Yup.object().shape({
   speed: Yup.number()
     .typeError("Must be a number")
     .integer("Must be an integer")
-    .min(2)
-    .max(40)
+    .min(350)
+    .max(2000)
     .required("Вкажи швидкість анімації"),
   cardSize: Yup.number()
     .typeError("Must be a number")
     .integer("Must be an integer")
-    .min(2)
-    .max(40)
+    .min(50)
+    .max(150)
     .required("Вкажи розмір карток"),
 });
 
