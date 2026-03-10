@@ -13,3 +13,6 @@ The application uses a technical cookie purely to remember your consent to this 
 
 ## 4. User Rights
 You have the right to delete all saved data at any time. You can do this by clearing your browser cache or deleting site data in your browser settings.
+
+## 5. Contact Us
+If you have any questions about this Privacy Policy or the operation of the "Memory Game," you can contact us via email: ipzk241_svm@student.ztu.edu.ua
