@@ -5,8 +5,8 @@
   "type": "module",
   "licenses": [
     {
-      "type": "MIT",
-      "url": "https://opensource.org/licenses/MIT"
+     "type": "Apache-2.0",
+     "url": "https://opensource.org/license/Apache-2.0"
     }
   ],
   "scripts": {
